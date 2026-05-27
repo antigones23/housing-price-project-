@@ -55,25 +55,7 @@ After standardizing, though, each coefficient represents the change in `median_h
 
 To fit the model, sklearn performs optimization under the hood to determine coefficients that minimize the residual sum of squares. 
 
-More precisely, it finds a vector $\hat{\beta}$ s.t.
-
-$$
-\hat{\beta}
-=
-\arg\min_{\beta}
-\sum_{i=1}^{n}(y_i-\hat{y}_i)^2
-$$
-$$
-=\arg\min_{\beta}\sum_{i=1}^{n}
-\left(
-y_i-\beta_0-\beta_1x_{i1}-\beta_2x_{i2}-\cdots-\beta_px_{ip}
-\right)^2
-$$
-
-Here, $x_{ip}$ refers to the value corresponding to the pth feature of the ith observation in the training group. 
-
 Below are the coefficients for our model: 
-
 
 | Feature | Coefficient |
 |---|---:|
@@ -118,7 +100,7 @@ Residuals = [-20, -10, 30]
 
 Now, we build a shallow tree (depth of at most 3) that splits our residuals with a threshold that minimizes variance between the child nodes. We average the values in each child node, and this is the output of the tree. Call this first tree function $h_1(x)$. 
 
-In our example, the threshold that reduces RSS is 10. So, for $x \le 10$, $h(x) = \frac{-20 + -10}{2} = -15$. For $x > 10$, $h(x) = 30. 
+In our example, the threshold that reduces RSS is 10. So, for $x \le 10$, $h(x) = \frac{-20 + -10}{2} = -15$. For $x > 10$, $h(x) = 30$. 
 
 We use this tree to update our prediction of $\bar{y}$. Our function has a chosen learning rate of $\eta = 0.1$, and this is the proportion we adjust our model by. Generally a smaller learn rate creates more exact predictions, but it also requires more trees. 
 
